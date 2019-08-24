@@ -24,7 +24,9 @@ activity<-read.csv("activity.csv")
 dailyactivity<-activity%>% group_by(date) %>% summarize(dailystep=sum(steps))
 hist(dailyactivity$dailystep)
 meandaily<-mean(dailyactivity$dailystep,na.rm=TRUE)
+meandaily
 mediandaily<-median(dailyactivity$dailystep,na.rm=TRUE)
+mediandaily
 ```
 
 # What is the average daily activity pattern?
@@ -35,6 +37,7 @@ mediandaily<-median(dailyactivity$dailystep,na.rm=TRUE)
 intervalaverage<-activity%>% group_by(interval) %>% summarize(interaverage=mean(steps,na.rm=TRUE))
 plot(x=intervalaverage$interval,y=intervalaverage$interaverage,type="l")
 maxinterval<-intervalaverage$interval[which.max(intervalaverage$interaverage)]
+maxinterval
 ```
 
 ## Imputing missing values
@@ -42,6 +45,7 @@ maxinterval<-intervalaverage$interval[which.max(intervalaverage$interaverage)]
 6.Calculate and report the total number of missing values in the dataset (i.e. the total number of rows with \color{red}{\verb|NA|}NAs)
 ```{r NAcount, echo=TRUE }
 nacount<-sum(is.na(activity$steps))
+nacount
 ```
 
 6.2 Devise a strategy for filling in all of the missing values in the dataset
@@ -63,6 +67,11 @@ for (i in 1:al){
 newactivity<-activity
 newactivity$steps<-newsteps
 newdailyactivity<-newactivity%>% group_by(date) %>% summarize(dailystep=sum(steps))
+
+newmeandaily<-mean(newdailyactivity$dailystep,na.rm=TRUE)
+newmeandaily
+newmediandaily<-median(newdailyactivity$dailystep,na.rm=TRUE)
+newmediandaily
 hist(newdailyactivity$dailystep)
 ```
 

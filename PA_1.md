@@ -29,7 +29,20 @@ hist(dailyactivity$dailystep)
 
 ```r
 meandaily<-mean(dailyactivity$dailystep,na.rm=TRUE)
+meandaily
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 mediandaily<-median(dailyactivity$dailystep,na.rm=TRUE)
+mediandaily
+```
+
+```
+## [1] 10765
 ```
 
 # What is the average daily activity pattern?
@@ -46,6 +59,11 @@ plot(x=intervalaverage$interval,y=intervalaverage$interaverage,type="l")
 
 ```r
 maxinterval<-intervalaverage$interval[which.max(intervalaverage$interaverage)]
+maxinterval
+```
+
+```
+## [1] 835
 ```
 
 ## Imputing missing values
@@ -54,6 +72,11 @@ maxinterval<-intervalaverage$interval[which.max(intervalaverage$interaverage)]
 
 ```r
 nacount<-sum(is.na(activity$steps))
+nacount
+```
+
+```
+## [1] 2304
 ```
 
 6.2 Devise a strategy for filling in all of the missing values in the dataset
@@ -77,6 +100,25 @@ for (i in 1:al){
 newactivity<-activity
 newactivity$steps<-newsteps
 newdailyactivity<-newactivity%>% group_by(date) %>% summarize(dailystep=sum(steps))
+
+newmeandaily<-mean(newdailyactivity$dailystep,na.rm=TRUE)
+newmeandaily
+```
+
+```
+## [1] 10766.19
+```
+
+```r
+newmediandaily<-median(newdailyactivity$dailystep,na.rm=TRUE)
+newmediandaily
+```
+
+```
+## [1] 10766.19
+```
+
+```r
 hist(newdailyactivity$dailystep)
 ```
 
